@@ -3,6 +3,7 @@ import requests
 from chatbot_ui.core.config import config
 
 
+
 def api_call(method, url, **kwargs):
 
     def _show_error_popup(message):
