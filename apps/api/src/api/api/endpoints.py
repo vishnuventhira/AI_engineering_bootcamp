@@ -5,7 +5,7 @@ import logging
 
 from api.agents.retrieval_generation import rag_pipeline
 
-
+from qdrant_client import QdrantClient
 logging.basicConfig(level = logging.INFO,
                     format = "%(asctime)s - %(name)s - %(levelname)s - %(message)s ")
 
@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 rag_router = APIRouter()
 
-qdrant_client = QdranrtClient(url="http://qdrant:6333")
+qdrant_client = QdrantClient(url="http://qdrant:6333")
 
 @rag_router.post("/")
 
