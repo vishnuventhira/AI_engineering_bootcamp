@@ -20,8 +20,6 @@ ragas_llm = LangchainLLMWrapper(ChatOpenAI(model="gpt-5.4-mini"))
 ragas_embeddings = LangchainEmbeddingsWrapper(OpenAIEmbeddings(model="text-embedding-3-small"))
 
 
-#since we are getting the outputs from the langsmith
-## we need to add .outputs to the actual values we are trying to get from the run and example objects
 def ragas_context_precision_id_based(run, example):
 
     sample = SingleTurnSample(
