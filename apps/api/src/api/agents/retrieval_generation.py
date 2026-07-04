@@ -128,7 +128,7 @@ def generate_answer(prompt):
 )
 def rag_pipeline( question,qdrant_client,top_k = 5):
     
-    retrieved_context = retrieve_data(question, k = top_k)
+    retrieved_context = retrieve_data(question,qdrant_client, k = top_k)
     preprocessed_context = process_context(retrieved_context)
     prompt = built_prompt(preprocessed_context, question)
     answer = generate_answer(prompt)
