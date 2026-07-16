@@ -6,7 +6,7 @@ from pydantic import BaseModel, Field
 from qdrant_client.models import Filter, FieldCondition, MatchValue, Prefetch, Document
 from qdrant_client import models
 
-
+from api.agents.utils.prompt_management import prompt_template_config, prompt_template_registry
 class RAGUsedContext(BaseModel):
     id: str = Field(description="ID of the item used to answer the question")
     description: str = Field(description="Description of the item used to answer the question")
@@ -107,19 +107,9 @@ def process_context(context):
         run_type = "prompt"
 )
 def built_prompt(preprocessed_context, question):
-    prompt = f"""
-    You are a shopping assistant that can answer questions about the products in stock
-    You will be given a question and list of retrieved context.
 
-    Instructions:
-    - Answer the question based on the provided context only
-    - Do not use markdown formatting
-    - Never use word context and refer to it as the available products.
-
-    Context: {preprocessed_context}
-    Question: {question}
-    
-    """
+    template = prompt_template_config("api/agents/prompts/retrieval_generation.yaml", "retrieval_generation")
+    prompt = template.render(context=preprocessed_context, question=question)
     return prompt
 
 
